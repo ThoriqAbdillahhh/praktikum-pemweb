@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Sistem informasi data - praktikum 1 - kelas D</h1>
+        <p>Data mahasiswa</p>
+        <img src="gambar muka kompres.jpeg" alt="mahasiswa" width="200px">
+    </header>
+    <hr>
+    <nav>
+        <ul>
+            <li><a href="informasi">Informasi Sistem</a></li>
+            <li><a href="daftar">Daftar Mahasiswa</a></li>
+            <li><a href="tambah">Tambah Bahasiswa Baru</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <main>
+        <section id="informasi">
+            <h2>Informasi Sistem</h2>
+            <p>Sistem ini dibuat untuk praktikum pemweb kelas D</p>
+            <article>
+                <h3>Informasi Sistem</h3>
+                <p>Sistem ini dibuat untuk menampilkan data mahasiswa</p>
+            </article>
+        </section>
+        <hr>
+        <section id="daftar-mahasiswa">
+            <h2>Daftar Mahasiswa aktif</h2>
+            <p>ini isinya data mahasiswa</p>
+            <table border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>foto</th>
+                        <th>npm</th>
+                        <th>Nama Lengkap</th>
+                        <th>Prodi</th>
+                        <th>angkatan</th>
+                        <th>email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><img src="gambar muka kompres.jpeg" alt="Thoriq Abdillah" width="100px"></td>
+                        <td>2415061104</td>
+                        <td>Thoriq Abdillah</td>
+                        <td>Teknik Informatika</td>
+                        <td>2024</td>
+                        <td>thoriqabdillah00@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><img src="gambar muka kompres.jpeg" alt="ahmad amar bakso" width="100px"></td>
+                        <td>2415151515</td>
+                        <td>ahmad amar bakso</td>
+                        <td>Sistem Informasi</td>
+                        <td>2024</td>
+                        <td>sisteminformasi00@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img src="gambar muka kompres.jpeg" alt="sytho simanjutak" width="100px"></td>
+                        <td>2415151599</td>
+                        <td>sytho simanjutak</td>
+                        <td>Ilmu Komputer</td>
+                        <td>2024</td>
+                        <td>ilmukomputer00@example.com</td>
+                    </tr>
+                </tbody>
+        </section>
+        <hr>
+        <section id="tambah-mahasiswa">
+            <h2>Tambah Mahasiswa Baru</h2>
+            <p>ini isinya form tambah mahasiswa baru</p>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Informasi Mahasiswa baru</legend>
+                    <p>
+                        <label for="npm">Nomor Pokok Mahasiswa:</label>
+                        <br>
+                        <input type="text" id="Npm" name="Nama" placeholder="Contoh: 2415061104" required pattern="[0-9]{8,12}" title="NPM harus berupa angka dan memiliki panjang antara 8 hingga 12 digit">
+                        <br>
+                        <small>*Data ini mandatory</small>
+                    </p>
+                    <p>
+                        <label for="Nama">Nama Lengkap:</label>
+                        <br>
+                        <input type="text" id="Npm" name="Nama" placeholder="Contoh: Thoriq Abdillah" required minlength="3" maxlength="100">
+                        <br>
+                        <small>*Data ini mandatory</small>
+                    </p>
+                    <p>
+                        <label for+"program_study">Program study</label>
+                        <br>
+                        <select id="program_study" name="program_study" required>
+                            <option>pilih program study</option>
+                            <option value="teknik informatika">Teknik Informatika</option>
+                        </select>
+                        <br>
+                        <small>*Data ini mandatory</small>
+                    </p>
+                    <p>
+                        <label for="angkatan">Tahun Angkatan</label>
+                        <br>
+                        <input type="number" id="angkatan" name="angkatan" placeholder="Contoh: 2024" required min="2018" max="2026">
+                        <br>
+                        <small>*Data ini mandatory</small>
+                    </p>
+                    <p>
+                        <label for="email">AlamatEmail</label>
+                        <br>
+                        <input type="email" id="email" name="email" placeholder="Contoh: example@example.com" required>
+                        <br>
+                        <small>*Data ini mandatory</small>
+                    </p>
+                    <p>
+                        <button type="submit">simpan data mahasiswa</button>
+                        <button type="reset">reset formulir</button>
+                    </p>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Tambah Mahasiswa">
+                </p>
+            </form>
+    </main>
+</body>
+</html>
+
