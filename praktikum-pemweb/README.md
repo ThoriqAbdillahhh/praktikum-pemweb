@@ -1,2 +1,0 @@
-# praktikum-pemweb
-buat praktikum
