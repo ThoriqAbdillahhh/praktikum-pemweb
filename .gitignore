@@ -1,1 +1,7 @@
-..gambar muka kompres.jpg
+# file yang di-ignore khusus
+.gambar muka kompres.jpg
+.Thoriq Abdillah_2415061104_D
+
+.vscode/
+.idea/
+*.swp
