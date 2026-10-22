@@ -28,11 +28,12 @@ const alertBox = document.getElementById("alert-box");
 const tabelBody = document.getElementById("tabel-body-mahasiswa");
 const totalBadge = document.getElementById("total-mahasiswa-badge");
 const totalInfo = document.getElementById("total-mahasiswa-info");
+const inputSearch = document.getElementById("search"); // sesuaikan ID dengan HTML-mu
 
 
 // Seleksi Elemen Formulir Tambah Mahasiswa
 const formTambah = document.getElementById("form-tambah-mahasiswa");
-const inputnpm = document.getElementById("npm");
+const inputNpm = document.getElementById("npm");
 const inputNama = document.getElementById("nama");
 const selectProdi = document.getElementById("program_studi");
 const inputAngkatan = document.getElementById("angkatan");
@@ -71,27 +72,24 @@ function renderTable(data = dataMahasiswa) {
     // Percobaan 3-2 langkah 6
 
     if (data.length === 0) {
-       tabelBody.innerHTML = `
-       <tr>
-              <td colspan="8" class="empty-row">
-              Tidak ada data mahasiswa yang tersimpan dalam sistem.
-              </td> 
-        <tr>`;
-       }
-       updateCounter(0);
-       return;
-    
+        tabelBody.innerHTML = `
+        <tr>
+            <td colspan="8" class="empty-row">
+                Tidak ada data mahasiswa yang tersimpan dalam sistem.
+            </td>
+        </tr>`;
+        updateCounter(0);
+        return;
+    }
 
-    
-       
-       // Percobaan 3-2 langkah 7
-    
+    // Percobaan 3-2 langkah 7
+
     data.forEach((mhs, index) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${index + 1}</td>
             <td>
-                <img src="img/avatar-default.svg" alt="Foto ${mhs.nama}" class="avatar-img" widht="36" height="36">
+                <img src="img/avatar-default.svg" alt="Foto ${mhs.nama}" class="avatar-img" width="36" height="36">
             </td>
             <td><strong>${mhs.npm}</strong></td>
             <td>${mhs.nama}</td>
@@ -99,50 +97,48 @@ function renderTable(data = dataMahasiswa) {
             <td>${mhs.angkatan}</td>
             <td><a href="mailto:${mhs.email}" class="link-email">${mhs.email}</a></td>
             <td> 
-                <button class="button" class="btn btn-danger btn-sm" 
+                <button class="btn btn-danger btn-sm" 
                 onclick="hapusMahasiswa('${mhs.npm}')">
                 Hapus
                 </button>
-                </td>
-
+            </td>
         `;
 
         // Percobaan 3-2 langkah 8
-tabelBody.appendChild(tr);
-
-        // Percobaan 3-2 langkah 9
-updateCounter(data.length);
+        tabelBody.appendChild(tr);
     });
 
+    // Percobaan 3-2 langkah 9
+    updateCounter(data.length);
+
     // Percobaan 3-2 langkah 10
-document.dispatchEvent(new CustomEvent("tableRendered", { detail: data }));
+    document.dispatchEvent(new CustomEvent("tableRendered", { detail: data }));
 }
 
 // 6. Validasi Form Sisi Klien Menggunakan Regular Expression (Percobaan 3-3).
 function validateForm(npm, nama, prodi, angkatan, email) {
-    return {isValid: true, message: ""}
-        if (!/^[0-9]{8,12}$/.test(npm)) {
-            return {isValid: false, message: "NPM harus berupa angka antara 8-12 karakter."};
-        }
-        if (dataMahasiswa.some(mhs => mhs.npm === npm)) {
-            return {isValid: false, message: "npm ${npm} sudah terdaftar dalam sistem sima."};
-        }
-        if (nama.trim().length < 3) {
-            return {isValid: false, message: "Nama harus memiliki minimal 3 karakter."};
-        }
-        if (!prodi) {
-            return {isValid: false, message: "Program studi harus dipilih."};
-        }
-        const angk = parseInt(angkatan, 10);
-        if (isNaN(angk) || angk < 2018 || angk > 2026) {
-            return {isValid: false, message: "Angkatan harus berupa angka antara 2000 hingga tahun 2026."};
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return {isValid: false, message: "Format email tidak valid. contoh: nama@domain.com"};
-        }
+    if (!/^[0-9]{8,12}$/.test(npm)) {
+        return {isValid: false, message: "NPM harus berupa angka antara 8-12 karakter."};
+    }
+    if (dataMahasiswa.some(mhs => mhs.npm === npm)) {
+        return {isValid: false, message: `NPM ${npm} sudah terdaftar dalam sistem sima.`};
+    }
+    if (nama.trim().length < 3) {
+        return {isValid: false, message: "Nama harus memiliki minimal 3 karakter."};
+    }
+    if (!prodi) {
+        return {isValid: false, message: "Program studi harus dipilih."};
+    }
+    const angk = parseInt(angkatan, 10);
+    if (isNaN(angk) || angk < 2000 || angk > 2026) {
+        return {isValid: false, message: "Angkatan harus berupa angka antara 2000 hingga tahun 2026."};
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return {isValid: false, message: "Format email tidak valid. contoh: nama@domain.com"};
+    }
 
-        return {isValid: true, message: ""};
-    };
+    return {isValid: true, message: ""};
+}
 
 
 // 7. Event Handling Tambah Data Tanpa Reload (Percobaan 3-4).
@@ -156,13 +152,11 @@ if (formTambah) {
 
         const npm = inputNpm.value.trim();
         const nama = inputNama.value.trim();
-        const prodi = inputProdi.value;
+        const prodi = selectProdi.value;
         const angkatan = inputAngkatan.value.trim();
-        const email =inputEmail.value.trim();
+        const email = inputEmail.value.trim();
 
         const validation = validateForm(npm, nama, prodi, angkatan, email);
-        
-        
 
         if (!validation.isValid) {
             // Percobaan 3-4 Langkah 6
@@ -183,7 +177,7 @@ if (formTambah) {
         // Percobaan 3-4 Langkah 8
         renderTable(dataMahasiswa);
         formTambah.reset();
-        showalert(`Data mahasiswa ${nama} (${npm})berhasil ditambahkan ke sistem.`, "success");
+        showalert(`Data mahasiswa ${nama} (${npm}) berhasil ditambahkan ke sistem.`, "success");
     });
 }
 
@@ -194,41 +188,38 @@ function hapusMahasiswa(npm) {
     const mhs = dataMahasiswa.find(item => item.npm === npm);
     if (!mhs) return;
     
-    const konfirmasi = confirm (`Apakah Anda yakin ingin menghapus data mahasiswa ${mhs.nama} (${mhs.npm})?`);
+    const konfirmasi = confirm(`Apakah Anda yakin ingin menghapus data mahasiswa ${mhs.nama} (${mhs.npm})?`);
     if (konfirmasi) {
         dataMahasiswa = dataMahasiswa.filter(item => item.npm !== npm);
         renderTable(dataMahasiswa);
-        showalert(`Data mahasiswa dengan npm (${npm})berhasil dihapus dari sistem.`, "info");
+        showalert(`Data mahasiswa dengan npm (${npm}) berhasil dihapus dari sistem.`, "info");
     }
-        
 }
 
 
 // 9. Fitur Pencarian Langsung Real-Time / Live Search (Percobaan 3-5)
 
 if (inputSearch) {
-    inputSearch.addEventListener("input", function() {
-            const keyword = inputSearch.value.trim().toLowerCase();
-        });
-    }
+    inputSearch.addEventListener("input", function () {
+        const keyword = inputSearch.value.trim().toLowerCase();
 
-if (keyword === "") {
-    renderTable(dataMahasiswa);
-} else {
-    const hasilFilter = dataMahasiswa.filter(mhs => 
-        mhs.npm.toLowerCase().includes(keyword) ||
-        mhs.nama.toLowerCase().includes(keyword) ||
-        mhs.program_studi.toLowerCase().includes(keyword)
-    );
-    renderTable(hasilFilter);
-} 
+        if (keyword === "") {
+            renderTable(dataMahasiswa);
+        } else {
+            const hasilFilter = dataMahasiswa.filter(mhs => 
+                mhs.npm.toLowerCase().includes(keyword) ||
+                mhs.nama.toLowerCase().includes(keyword) ||
+                mhs.program_studi.toLowerCase().includes(keyword)
+            );
+            renderTable(hasilFilter);
+        }
+    });
+}
 
 
 // Inisialisasi saat DOM selesai dimuat
 
-document.addEventListener(
-    "DOMContentLoaded", function () {
-        showalert("Selamat Datang di Aplikasi SIMA", "info");
-    
-}
-);
+document.addEventListener("DOMContentLoaded", function () {
+    renderTable();
+    showalert("Selamat Datang di Aplikasi SIMA", "info");
+});
