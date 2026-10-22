@@ -95,8 +95,8 @@ function tambah_mahasiswa($npm, $nama, $program_studi, $angkatan, $email) {
     $npm = sanitize($npm);
     $nama = sanitize($nama);
     $program_studi = sanitize($program_studi);
-    $angkatan = (init) $angkatan;
-    $email = sanitize($email)
+    $angkatan = (int) $angkatan;
+    $email = sanitize($email);
 
     // Validasi Server-Side
     if (empty($npm) || empty($nama) || empty($program_studi) || empty($angkatan) || empty($email)) {
@@ -205,14 +205,14 @@ function set_flash_message($type, $message){
 function get_flash_message(){
     if (isset($_SESSION['flash_message'])) {
         $flash = $_SESSION['flash_message'];
-        unset($_SESSION['flash_message'])
+        unset($_SESSION['flash_message']);
         return $flash;
+    }
+
+    return null;
 }
-}
-return null;
 
 /**
  * Ambil dan hapus flash message
  */
-
 
